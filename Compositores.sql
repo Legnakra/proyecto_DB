@@ -1,6 +1,6 @@
 CREATE TABLE compositores(
 nombre VARCHAR (50),
-anonacimiento DATE (4),
+anonacimiento DATE,
 epoca VARCHAR (20),
 CONSTRAINT PK_compositores PRIMARY KEY (nombre)
 );
