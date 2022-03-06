@@ -83,7 +83,9 @@ def ListarApellido(db,nombreautor):
             listas = cursor.fetchall()
             for lista in listas:
                 if nombreautor in listas:
-                    print(lista["nombreautor"])
+                    print("Nombre: ",lista["nombreautor"])
+                    print("Obra: ", lista["nombrecomposicion"])
+                    print(lista)
     except:
         print("Consulta: Error.")
 
@@ -147,8 +149,8 @@ def BorrarComposicion(db,movimiento):
 
 #Función 6
 ##a
-def ActualizarEpoca(db,epoca,nombre):
-    sql= "UPDATE compositores SET epoca = '%s' WHERE nombre = '%s'"(epoca,nombre)
+def ActualizarEpoca(db,epoca):
+    sql= "UPDATE compositores SET epoca = '%s'"(epoca)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
@@ -158,13 +160,11 @@ def ActualizarEpoca(db,epoca,nombre):
 
 ##b
 def MostrarEpoca(db):
-    sqlb ="SELECT epoca FROM compositores"
+    sql ="SELECT epoca FROM compositores"
     cursor = db.cursor()
     try:
-        cursor.execute(sqlb)
-        lista = cursor.fetchall()
-        for tabla in lista:
-            print("Estas son las épocas de los compositores: ")
-            print(tabla)
+        cursor.execute(sql)
+        tabla = cursor.fetchall()
+        print(tabla)
     except:
         print("Consulta: Error.")
