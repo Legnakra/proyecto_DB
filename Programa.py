@@ -39,11 +39,11 @@ while opcion!=0:
         agregar_autor = ("El autor no se encuentra en la base de datos. ¿Desea incluirlo en la misma?(S/N)")
         if agregar_autor =="S":
             print("Nuevo compositor.")
-            autor = {}
-            autor["nombre"] = input("Compositor: ")
-            autor["annonacimiento"] = int(input("Fecha de nacimiento (YYYY-MM-DD): "))
-            autor["epoca"] = input("Época: ")
-            InsertarCompositor(db,autor)
+            compositores = {}
+            compositores["nombre"] = input("Compositor: ")
+            compositores["annonacimiento"] = int(input("Fecha de nacimiento (YYYY-MM-DD): "))                
+            compositores["epoca"] = input("Época: ")
+            InsertarCompositor(db,compositores)
             time.sleep(2)
         
 
@@ -70,5 +70,5 @@ while opcion!=0:
     else:
         print("\n")
     opcion=Menu()
-
+Desconexión(db)
 print("¡Hasta pronto!")
