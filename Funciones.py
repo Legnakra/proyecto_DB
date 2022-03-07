@@ -82,10 +82,7 @@ def ListarApellido(db,nombreautor):
         else:
             listas = cursor.fetchall()
             for lista in listas:
-                if nombreautor in listas:
-                    print("Nombre: ",lista["nombreautor"])
-                    print("Obra: ", lista["nombrecomposicion"])
-                    print(lista)
+                print(lista["nombrecomposicion"])
     except:
         print("Consulta: Error.")
 
@@ -129,18 +126,18 @@ def MostrarCompositores(db):
 
 
 #Función 5
-def BorrarComposicion(db,movimiento):
-    sql = "DELETE FROM composiciones WHERE movimiento = '%d'" % movimiento
-    cursor = db.cursor(MySQLdb.cursors.DictCursor)
+def BorrarComposicion(db,movimientos):
+    sql = "DELETE FROM composiciones WHERE movimientos = %d" % movimientos
+    print(sql)
+    cursor = db.cursor()
     confirmacion = input("¿Desea eliminar dichas obras? (S/N): ")
     if confirmacion== "S":
         try:
             cursor.execute(sql)
-            db.coomit()
+            db.commit()
+            print("Composiciones eliminadas.")
             if cursor.rowcount ==0:
                 print("No hay composiciones con ese número de movimientos.")
-            else:
-                print("Composiciones eliminadas.")
         except:
             print("Eror: No se han podido eliminar las composiciones.")
             db.rollback()

@@ -1,4 +1,5 @@
 from Funciones import *
+import time
 
 db = ConectarBD("localhost", "mj","admin","Compositores")
 opcion=Menu()
@@ -8,7 +9,7 @@ while opcion!=0:
     if opcion==1:
         ListarCompositores(db)
         print ("- - - - - - - - - - - - - - - - - - -")
-        opcion=Menu()
+        time.sleep(2)
     
 #Opción 2 del menú:
     elif opcion==2:
@@ -16,13 +17,14 @@ while opcion!=0:
         busctipo=input("Introduzca el tipo de composición que desea buscar: ")
         print("Composiciones ", busctipo)
         BuscarTipo(db,busctipo)
-        opcion=Menu()
+        time.sleep(2)
 
 #Opción 3 del menú:
     elif opcion ==3:
         nombreautor= input("Escriba el nombre del compositor que desea buscar: ")
+        print("Nombre: ",nombreautor)
         ListarApellido(db,nombreautor)
-        opcion=Menu()
+        time.sleep(2)
 
 
 #Opción 4 del menú:
@@ -34,18 +36,15 @@ while opcion!=0:
         composicion["grupo"] = input("Agrupación: ")
         composicion["nombreautor"] = input("Autor: ")
         InsertarObra(db,composicion)
-        if composicion["nombreautor"] in db:
-            opcion=Menu()
-        else:
-            agregar_autor = ("El autor no se encuentra en la base de datos. ¿Desea incluirlo en la misma?(S/N)")
-            if agregar_autor =="S":
-                print("Nuevo compositor.")
-                autor = {}
-                autor["nombre"] = input("Compositor: ")
-                autor["annonacimiento"] = int(input("Fecha de nacimiento (YYYY-MM-DD): "))
-                autor["epoca"] = input("Época: ")
-                InsertarCompositor(db,autor)
-                opcion=Menu()
+        agregar_autor = ("El autor no se encuentra en la base de datos. ¿Desea incluirlo en la misma?(S/N)")
+        if agregar_autor =="S":
+            print("Nuevo compositor.")
+            autor = {}
+            autor["nombre"] = input("Compositor: ")
+            autor["annonacimiento"] = int(input("Fecha de nacimiento (YYYY-MM-DD): "))
+            autor["epoca"] = input("Época: ")
+            InsertarCompositor(db,autor)
+            time.sleep(2)
         
 
 
@@ -53,8 +52,7 @@ while opcion!=0:
     elif opcion ==5:
         movimientos = int(input("¿Cuantos movimientos tienen las obras que desea eliminar?: "))
         BorrarComposicion(db,movimientos)
-        opcion=Menu()
-
+        time.sleep(2)
 
 
 #Opción 6 del menú:
@@ -62,7 +60,7 @@ while opcion!=0:
         print (MostrarEpoca(db))
         epoca = input("¿Cuál es la época que desea actualizar?: ")
         ActualizarEpoca(db,epoca)
-        opcion=Menu()
+        time.sleep(2)
 
 
 
@@ -71,6 +69,6 @@ while opcion!=0:
         Desconexión(db)
     else:
         print("\n")
-        opcion=Menu()
+    opcion=Menu()
 
 print("¡Hasta pronto!")
